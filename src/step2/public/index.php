@@ -15,6 +15,7 @@ require __DIR__ . '/../vendor/autoload.php';
  */
 $pimpleContainer = new \Pimple\Container();
 
+// pimpleContainerのmailerにSwiftMailSenderのインスタンスをセットする
 $pimpleContainer['mailer'] = function ($c) {
     $mailer = new SwiftMailSender();
     return $mailer;

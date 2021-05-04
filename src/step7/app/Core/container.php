@@ -49,6 +49,7 @@ return function () {
         }
     );
 
+    // TestRepositoryとしてTestMariadbRepositoryという具象クラスをDIコンテナにセットしてる
     Container::getInstance()->set(
         'TestRepository',
         function ($c) {

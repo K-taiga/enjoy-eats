@@ -20,6 +20,7 @@ abstract class AbstractMariadbRepository extends AbstractSqlRepository
 
     /**
      * 直近にinsertしたIDカラム値(またはシーケンス値)を取得する
+     * DBごとに書き方が異なるためこのクラスに記述
      * @param string|null $sequenceName シーケンス名
      * @return int|null シーケンス値
      */

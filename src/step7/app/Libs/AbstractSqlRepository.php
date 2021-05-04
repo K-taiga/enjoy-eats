@@ -88,6 +88,8 @@ abstract class AbstractSqlRepository
      */
     public function create(array $datas): int
     {
+        // 第一引数はconstructから受け取っている
+        // create(['value1' => 'step7']
         return $this->createRecord($this->tableName, $datas);
     }
 
@@ -98,6 +100,7 @@ abstract class AbstractSqlRepository
      */
     protected function createRecord(string $table, array $datas): int
     {
+        // INSERT INTO test(value1) values('step7')が出来上がる
         $sql = "INSERT INTO {$table}(";
         $sql .= implode(',', array_keys($datas));
         $sql .= ") values(";

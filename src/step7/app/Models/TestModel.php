@@ -15,6 +15,7 @@ class TestModel
 {
     /**
      * TestRepositoryInterfaceを実装するインスタンス
+     * Interfaceとしてプロパティを持つことでTestMariadbRepository以外もセットできるようになる
      */
     private TestRepositoryInterface $testRepository;
 
@@ -23,6 +24,8 @@ class TestModel
      */
     public function __construct()
     {
+        // コンストラクタでDIコンテナからTestRepositoryを取得
+        // DIコンテナにセットしてるのはApp/Core/container.phpのline52
         $this->testRepository = Container::getInstance()->get('TestRepository');
     }
 

@@ -17,6 +17,7 @@ class TestMariadbRepository extends AbstractMariadbRepository implements TestRep
      */
     public function __construct()
     {
+        // 親クラスのconstructを呼び出し、table名のtestsを引数に渡す
         parent::__construct('tests');
     }
 }

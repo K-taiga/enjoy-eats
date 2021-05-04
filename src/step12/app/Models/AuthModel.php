@@ -41,6 +41,7 @@ class AuthModel extends AbstractModel
         if (is_null($mail) || is_null($password)) {
             return null;
         }
+        // mailがusers tableにあるか
         $user = $this->userRepository->findOne(['mail' => $mail]);
         if (!$user || intval($user['id']) <= 0 || trim($user['password']) === '') {
             return null;
@@ -49,6 +50,7 @@ class AuthModel extends AbstractModel
         if ($verified !== true) {
             return null;
         }
+        // loginできればUserLoginInfoインスタンスにログイン情報をセット
         $loginInfo = new UserLoginInfo();
         $loginInfo->setId($user['id']);
         $loginInfo->setMail($user['mail']);

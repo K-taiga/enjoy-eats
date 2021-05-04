@@ -36,11 +36,15 @@ class AuthController extends AbstractUserController
         $this->view->layoutTitle = 'ログイン';
         if ($this->request->hasPost('send')) {
             $this->checkCsrfToken();
+            // ログインチュック
             $loginInfo = $this->authModel->login($this->request->byPost('mail'), $this->request->byPost('password'));
+            // ログインできればUserLoginInfo型が返ってくる
             if (!($loginInfo instanceof UserLoginInfo)) {
                 $this->view->errors = ['ログインに失敗しました。'];
             } else {
+                // sessionにログイン情報をセット
                 $this->session->setLoginInfo($loginInfo);
+                // session_idを再生成
                 $this->session->regenerate(true);
                 $this->forwardTo(303, '/auth/login-complete');
                 return;

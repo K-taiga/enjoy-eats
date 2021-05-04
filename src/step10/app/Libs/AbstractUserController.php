@@ -58,14 +58,20 @@ abstract class AbstractUserController extends Core\AbstractController
      */
     private function loadView(): View
     {
+        // アクセスされたパスに応じてそのviewの場所を特定する
+        // http~~~/user/detail?id=123 → /user/detail?id=123だけにする
         $uri = preg_replace('/^\//', '', $_SERVER['REQUEST_URI']);
+        // strposで?の位置を特定
+        // substrで?のとこまでを取得 => ?が取り除かれる
         if (false !== $pos = strpos($uri, '?')) {
             $uri = substr($uri, 0, $pos);
         }
         $uri = rawurldecode($uri);
+        // /user/detail => user,detail
         $uriPaths = explode('/', $uri);
         $controller = isset($uriPaths[0]) && $uriPaths[0] ? basename($uriPaths[0]) : 'index';
         $method = isset($uriPaths[1]) && $uriPaths[1] ? basename($uriPaths[1]) : 'index';
+        // パスを特定
         $templatePath = realpath(__DIR__ . "/../Modules/User/Views/{$controller}/{$method}.html");
         $view = new View($templatePath, self::DEFAULT_LAYOUT_PATH);
         return $view;

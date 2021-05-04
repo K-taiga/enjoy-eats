@@ -24,6 +24,7 @@ class UserController
     public function indexAction(): void
     {
         echo 'UserController::indexAction()がコールされました。';
+        // 第一引数が固有のページ(template_path)、第二引数がlayout(layout_path)
         $view = new View(
             __DIR__ . '/../Views/user/index.html',
             __DIR__ . '/../Layouts/layout.html'
@@ -31,6 +32,7 @@ class UserController
         $view->message1 = 'テストメッセージ1';
         $view->message2 = 'テストメッセージ2';
         $view->message3 = 'テストメッセージ3(JavaScript付き) <script>alert(1);</script>';
+        // renderで
         echo $view->render();
     }
 

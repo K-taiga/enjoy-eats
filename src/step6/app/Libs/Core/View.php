@@ -44,7 +44,9 @@ class View
      */
     public function render(): string
     {
+        // output_bufferを挟むことで出力をこのメソッド内では行わないようにする
         ob_start();
+        // layout.html内ででuser/index.htmlを呼び出す
         include($this->layoutPath);
         $html = ob_get_contents();
         ob_end_clean();
@@ -86,8 +88,11 @@ class View
      */
     public function __call($helperMethod, $args)
     {
+        // app/Helpers/EscapeHelper.phpを呼び出して
         $helperClass = "\\App\\Helpers\\" . ucfirst($helperMethod) . 'Helper';
         $helperInstance = new $helperClass();
+        // call_uesr_func_arrayでarray内のhelperMethodを呼び出す
+        // ここではEscapeHelperのescapeメソッド
         return call_user_func_array(
             array($helperInstance, $helperMethod),
             $args

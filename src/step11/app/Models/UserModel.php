@@ -129,6 +129,7 @@ TEXT;
             'mail' => $datas['mail'],
             'password' => Password::generate($datas['password'])
         ];
+        // SQLを実際に実行するのはRepositoryクラス
         $this->userRepository->create($values);
     }
 

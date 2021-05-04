@@ -68,6 +68,7 @@ class FileUploader
             return false;
         }
         // MIMEタイプをチェックする
+        // ファイルを開いて読む必要あり
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $this->uploadedFile->getTemporaryName());
         finfo_close($finfo);
@@ -80,6 +81,7 @@ class FileUploader
             $this->errorMessage = $this->uploadConfig->getLabel() . '：ファイルサイズを超過しています。';
             return false;
         }
+        // すべてのチェックが通ればtrue
         return true;
     }
 
@@ -90,6 +92,7 @@ class FileUploader
     public function upload()
     {
         $extension = pathinfo($this->uploadedFile->getName(), PATHINFO_EXTENSION);
+        // newNameにリネームして重複しないようにする
         $destinationPath = $this->uploadConfig->getDestination() . '/' . $this->uploadConfig->getNewName() . '.' . $extension;
         $uploaded = move_uploaded_file($this->uploadedFile->getTemporaryName(), $destinationPath);
         if ($uploaded) {

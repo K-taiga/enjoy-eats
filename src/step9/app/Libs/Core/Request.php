@@ -17,6 +17,7 @@ class Request implements RequestInterface
      */
     public function byGet(string $key)
     {
+        // filter_inputで$_GETのキーの存在チェックをしなくて済む
         return filter_input(INPUT_GET, $key);
     }
 
@@ -37,6 +38,7 @@ class Request implements RequestInterface
      */
     public function byGetAsInt(string $key): ?int
     {
+        // 整数値が入ってなければfalseが返るがその後のif文でnullを入れている
         $input = filter_input(INPUT_GET, $key, FILTER_VALIDATE_INT);
         if ($input === false) {
             return null;

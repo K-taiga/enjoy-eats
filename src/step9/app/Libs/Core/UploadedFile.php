@@ -55,6 +55,8 @@ class UploadedFile
      */
     public function isUploadedFile(): bool
     {
+        // is_uploaded_file関数でfileがHTTPのPOSTで正しく送られたものか検証する
+        // 他の悪意のあるところから来ていないかのチェック
         return is_uploaded_file($this->temporaryName);
     }
 
@@ -63,6 +65,7 @@ class UploadedFile
      */
     public function isSuccess(): bool
     {
+        // error文の定数チェック
         return $this->error === UPLOAD_ERR_OK;
     }
 

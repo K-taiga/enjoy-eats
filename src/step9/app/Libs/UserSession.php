@@ -54,6 +54,7 @@ class UserSession extends Core\Session implements UserSessionInterface
      */
     public function clearExceptingLoginKey(): void
     {
+        // ログイン情報を一旦退避して、セッションをクリアしてまたセットする
         $loginInfo = $this->get(self::LOGIN_KEY);
         $this->clear();
         $this->set(self::LOGIN_KEY, $loginInfo);
@@ -64,6 +65,7 @@ class UserSession extends Core\Session implements UserSessionInterface
      */
     public function setLoginInfo(UserLoginInfo $loginInfo): void
     {
+        // authがキー
         $this->set(self::LOGIN_KEY, $loginInfo);
     }
 
@@ -73,6 +75,7 @@ class UserSession extends Core\Session implements UserSessionInterface
      */
     public function generateCsrfToken(): string
     {
+        // 生成した数値を16進数にしてセット
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $this->set(self::CSRF_KEY, $token);
         return $token;

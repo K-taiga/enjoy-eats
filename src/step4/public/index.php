@@ -69,6 +69,7 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
+        // エラーはset_exception_handlerに渡される
         throw new \App\Libs\Core\Exception\PageNotFoundException();
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:

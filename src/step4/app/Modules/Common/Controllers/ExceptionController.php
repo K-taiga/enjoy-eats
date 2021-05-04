@@ -24,9 +24,11 @@ class ExceptionController
     /**
      * エラーページを表示する
      */
+    // Throwableはerror型とexception型両方受け取れる
     public function showAction(\Throwable $e)
     {
         $message = null;
+        // エラーが自作のクラスの場合
         if ($e instanceof HttpExceptionInterface) {
             list($statusCode, $statusMessage) = $e->getHttpStatusCode();
             header('HTTP/1.1 ' . $statusCode . ' ' . $statusMessage);
@@ -36,6 +38,7 @@ class ExceptionController
                 $message = '内部エラーが発生しました。';
                 $this->writeLog($e);
             }
+        // phpのexceptionクラスなどの場合
         } else {
             header('HTTP/1.1 500 Internal Server Error');
             $message = '内部エラーが発生しました。';

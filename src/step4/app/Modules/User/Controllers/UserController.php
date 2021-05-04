@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Libs\Core\Exception\InternalServerErrorException;
+
 /**
  * ユーザに関連する画面コントローラー
  * @package App\Controllers
@@ -22,7 +24,7 @@ class UserController
      */
     public function indexAction(): void
     {
-        echo 'UserController::indexAction()がコールされました。';
+        throw new InternalServerErrorException('内部エラーが起こりました');
     }
 
     /**

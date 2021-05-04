@@ -24,6 +24,7 @@ class PdoConnector
     public function connect(): PDO
     {
         if (self::$connection === null) {
+            // application.iniのdbセクションの情報を取得
             $dbConfig = ApplicationConfigs::getInstance()->getDatabase();
             self::$connection = new PDO($dbConfig['dsn'], $dbConfig['user'], $dbConfig['password']);
             self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

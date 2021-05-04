@@ -68,6 +68,7 @@ class ApplicationConfigs
     public function getPaths(): array
     {
         return [
+            // __DIR__はマジック変数で、このファイル自身の絶対パスが入っている
             'log' => realpath(__DIR__ . '/../../logs'),
             'upload' => realpath(__DIR__ . '/../../../upload'),
             'helpers' => realpath(__DIR__ . '/../Helpers'),

@@ -74,6 +74,7 @@ class PostController extends AbstractUserController
     {
         $this->view->layoutTitle = '記事を投稿する';
         $this->view->csrfToken = $this->session->generateCsrfToken();
+        // sessionから取得した値をviewにセット
         foreach ($this->session->getAllKeys() as $key) {
             $this->view->{$key} = $this->session->get($key);
         }

@@ -42,16 +42,19 @@ class SummaryRankingBatch extends ConsoleApplication
     protected function job(): void
     {
         $popularArticles = $this->articleModel->findPopularArticles(10);
+        // dry-runmモードならデバッグして終了
         if (isset($this->options['dry-run'])) {
             print_r($popularArticles);
             return;
         }
+        // array_columnで任意のキーのみの配列にする
         $popularArticleIds = array_column($popularArticles, 'id');
         $this->articleModel->saveRanks($popularArticleIds);
     }
 }
 
 // メインルーチン
+// getoptでコンソールからdry-runを取得できる
 $options = getopt('', ['dry-run']);
 $batch = new SummaryRankingBatch($options);
 $batch->execute();

@@ -88,6 +88,7 @@ class Pager
     private function calculatePage(): object
     {
         $isPageExists = $this->count > $this->limit;
+        // phpの標準メソッドのstdClassでオブジェクトを生成
         $pager = new \stdClass();
         $pager->totalCount = $this->count;
         $pager->currentPage = $this->currentPage;
@@ -124,6 +125,7 @@ class Pager
     /**
      * $this->pagerのプロパティを取得するために使うマジックメソッド
      */
+    // マジックメソッドの__getでプロパティにアクセスできる
     public function __get($name)
     {
         return $this->pager->{$name};

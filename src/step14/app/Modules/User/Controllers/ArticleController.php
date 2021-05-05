@@ -49,6 +49,7 @@ class ArticleController extends AbstractUserController
         } else {
             $perPage = $this->view->perPage = 10;
         }
+        // null合体演算子でpageがissetされていればそれを使うし、そうじゃなければ初期値の1
         $page = $this->view->page = $this->request->byGetAsInt('page') ?? 1;
         $this->view->articles = $this->articleModel->find($conditions, $perPage, $page);
         $count = $this->view->count = $this->articleModel->getCount($conditions);
